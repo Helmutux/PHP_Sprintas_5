@@ -1,4 +1,5 @@
 /*
+D | SPACE
 Author URI: http://webthemez.com/
 Note: 
 Licence under Creative Commons Attribution 3.0 
@@ -129,6 +130,7 @@ wow = new WOW({
     animateClass: 'animated',
     offset: 100
 });
+
 wow.init();
 document.getElementById('').onclick = function() {
     var section = document.createElement('section');
