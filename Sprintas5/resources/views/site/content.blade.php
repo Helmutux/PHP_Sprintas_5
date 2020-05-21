@@ -1,8 +1,6 @@
 
 @if(isset($pages) && is_object($pages))
-
 @foreach($pages as $k=>$page)
-    
     @if($k%2 == 0)
         <!--Hero_Section pradzia-->
         <section id="home" class="top_cont_outer">
@@ -13,7 +11,7 @@
                             <div class="col-lg-5 col-sm-7">
                                 <div class="top_left_cont zoomIn wow animated">
                                     {!! $page->text !!}                                    
-                                    <a href="{{ route('page', array('alias'=>$page->alias)) }}" class="read_more2">Read more</a>
+                                    <a href="{{ route('page', array('alias'=>$page->alias)) }}" class="read_more2">Plačiau</a>
                                 </div>
                             </div>
                             <div class="col-lg-7 col-sm-5">
@@ -41,7 +39,7 @@
                                     {!! $page->text !!} <!-- panaudojame laravelcollective sintakse pasiimdami duomenis is db-->
                                 </div>
                                 <div class="work_bottom">
-                                    <span>Norite sužinoti daugiau?</span> <a href="{{ route('page', array('alias'=>$page->alias)) }}" class="contact_btn">Contact Us</a>
+                                    <span>Norite sužinoti daugiau?</span> <a href="{{ route('page', array('alias'=>$page->alias)) }}" class="contact_btn">Susisiekite</a>
                                 </div>
                             </div>
                         </div>
@@ -51,85 +49,42 @@
         </section>
     <!--Aboutus pabaiga-->
     @endif
-
 @endforeach
-
-
-
 @endif
 
-
-
+@if(isset($services) && is_object($services))
 <!--Service pradzia-->
 <section id="service">
     <div class="container">
-        <h2>Services</h2>
+        <h2>Paslaugos</h2>
         <div class="service_wrapper">
-            <div class="row">
-                <div class="col-lg-4">
+
+            @foreach($services as $k=>$service)
+                @if($k == 0 || $k%3 == 0) <!-- apsirasome salyga, kuri rodo, kad formuojame 3 dinaminiu elementu rinkiniu eile -->
+                    <div class="row {{ ($k !=0) ? 'borderTop':'' }}"><!-- pirmai eilei pabraukimo virsuje nereikia -->
+                @endif
+                 <div class="col-lg-4 {{ ($k%3 >0) ? 'borderLeft':'' }} {{ ($k>2)? 'mrgTop' : '' }}"><!-- jei elementas nera pirmasis naudojame pabraukima is kaires; jei dinamiskai perduodamo elemento indeksas didesnis uz 2 (t.y. 4 ir toliau irasas) pridedame papildoma margin parametra-->
                     <div class="service_block">
                         <div class="service_icon delay-03s animated wow  zoomIn">
-                            <span><i class="fa fa-android"></i></span>
+                            <span><i class="fa {{ $service->icon }}"></i></span>
                         </div>
-                        <h3 class="animated fadeInUp wow">Android</h3>
-                        <p class="animated fadeInDown wow">Lorem Ipsum is simply dummy text of the printing and
-                            typesetting industry. Lorem Ipsum has been the industry's standard dummy text.</p>
+                        <h3 class="animated fadeInUp wow">{{ $service->name }}</h3>
+                        <p class="animated fadeInDown wow">{{ $service->text }}</p>
                     </div>
                 </div>
-                <div class="col-lg-4 borderLeft">
-                    <div class="service_block">
-                        <div class="service_icon icon2  delay-03s animated wow zoomIn">
-                            <span><i class="fa fa-apple"></i></span>
-                        </div>
-                        <h3 class="animated fadeInUp wow">Apple IOS</h3>
-                        <p class="animated fadeInDown wow">Lorem Ipsum is simply dummy text of the printing and
-                            typesetting industry. Lorem Ipsum has been the industry's standard dummy text.</p>
+                @if(($k+1)%3 == 0)
                     </div>
-                </div>
-                <div class="col-lg-4 borderLeft">
-                    <div class="service_block">
-                        <div class="service_icon icon3  delay-03s animated wow zoomIn">
-                            <span><i class="fa fa-html5"></i></span>
-                        </div>
-                        <h3 class="animated fadeInUp wow">Design</h3>
-                        <p class="animated fadeInDown wow">Lorem Ipsum is simply dummy text of the printing and
-                            typesetting industry. Lorem Ipsum has been the industry's standard dummy text.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="row borderTop">
-                <div class="col-lg-4 mrgTop">
-                    <div class="service_block">
-                        <div class="service_icon delay-03s animated wow  zoomIn"> <span><i
-                                    class="fa fa-dropbox"></i></span> </div>
-                        <h3 class="animated fadeInUp wow">Concept</h3>
-                        <p class="animated fadeInDown wow">Lorem Ipsum is simply dummy text of the printing and
-                            typesetting industry. Lorem Ipsum has been the industry's standard dummy text.</p>
-                    </div>
-                </div>
-                <div class="col-lg-4 borderLeft mrgTop">
-                    <div class="service_block">
-                        <div class="service_icon icon2  delay-03s animated wow zoomIn"> <span><i
-                                    class="fa fa-slack"></i></span> </div>
-                        <h3 class="animated fadeInUp wow">User Research</h3>
-                        <p class="animated fadeInDown wow">Lorem Ipsum is simply dummy text of the printing and
-                            typesetting industry. Lorem Ipsum has been the industry's standard dummy text.</p>
-                    </div>
-                </div>
-                <div class="col-lg-4 borderLeft mrgTop">
-                    <div class="service_block">
-                        <div class="service_icon icon3  delay-03s animated wow zoomIn"> <span><i
-                                    class="fa fa-users"></i></span> </div>
-                        <h3 class="animated fadeInUp wow">User Experience</h3>
-                        <p class="animated fadeInDown wow">Lorem Ipsum is simply dummy text of the printing and
-                            typesetting industry. Lorem Ipsum has been the industry's standard dummy text.</p>
-                    </div>
-                </div>
-            </div>
+                @endif
+            @endforeach
         </div>
     </div>
 </section>
 <!--Service pabaiga-->
+@endif
+
+
+
+
 
 
 
