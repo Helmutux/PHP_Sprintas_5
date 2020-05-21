@@ -1,54 +1,57 @@
-
 @if(isset($pages) && is_object($pages))
 @foreach($pages as $k=>$page)
-    @if($k%2 == 0)
-        <!--Hero_Section pradzia-->
-        <section id="home" class="top_cont_outer">
-            <div class="hero_wrapper">
-                <div class="container">
-                    <div class="hero_section">
-                        <div class="row">
-                            <div class="col-lg-5 col-sm-7">
-                                <div class="top_left_cont zoomIn wow animated">
-                                    {!! $page->text !!}                                    
-                                    <a href="{{ route('page', array('alias'=>$page->alias)) }}" class="read_more2">Plačiau</a>
-                                </div>
-                            </div>
-                            <div class="col-lg-7 col-sm-5">
-                                {!! Html::image('img/'.$page->images) !!} <!-- panaudojame laravelcollective sintakse -->
-                            </div>
+@if($k%2 == 0)
+<!--Hero_Section pradzia-->
+<section id="home" class="top_cont_outer">
+    <div class="hero_wrapper">
+        <div class="container">
+            <div class="hero_section">
+                <div class="row">
+                    <div class="col-lg-5 col-sm-7">
+                        <div class="top_left_cont zoomIn wow animated">
+                            {!! $page->text !!}
+                            <a href="{{ route('page', array('alias'=>$page->alias)) }}" class="read_more2">Plačiau</a>
+                        </div>
+                    </div>
+                    <div class="col-lg-7 col-sm-5">
+                        {!! Html::image('img/'.$page->images) !!}
+                        <!-- panaudojame laravelcollective sintakse -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--Hero_Section pabaiga-->
+@else
+<!--Aboutus pradzia-->
+<section id="aboutUs">
+    <div class="inner_wrapper">
+        <div class="container">
+            <h2>{{ $page->name }}</h2> <!-- dinamiskai pasiimame irasus is db -->
+            <div class="inner_section">
+                <div class="row">
+                    <div class=" col-lg-4 col-md-4 col-sm-4 col-xs-12 pull-right">
+                        {!! Html::image('img/'.$page->images, '', array('class'=>'delay-03s animated wow zoomIn')) !!}
+                    </div>
+                    <div class=" col-lg-7 col-md-7 col-sm-7 col-xs-12 pull-left">
+                        <div class=" delay-01s animated fadeInDown wow animated">
+                            {!! $page->text !!}
+                            <!-- panaudojame laravelcollective sintakse pasiimdami duomenis is db-->
+                        </div>
+                        <div class="work_bottom">
+                            <span>Norite sužinoti daugiau?</span> <a
+                                href="{{ route('page', array('alias'=>$page->alias)) }}"
+                                class="contact_btn">Susisiekite</a>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
-        <!--Hero_Section pabaiga-->
-    @else
-        <!--Aboutus pradzia-->
-        <section id="aboutUs">
-            <div class="inner_wrapper">
-                <div class="container">
-                    <h2>{{ $page->name }}</h2> <!-- dinamiskai pasiimame irasus is db -->
-                    <div class="inner_section">
-                        <div class="row">
-                            <div class=" col-lg-4 col-md-4 col-sm-4 col-xs-12 pull-right">
-                                {!! Html::image('img/'.$page->images, '', array('class'=>'delay-03s animated wow zoomIn')) !!}  
-                            </div>
-                            <div class=" col-lg-7 col-md-7 col-sm-7 col-xs-12 pull-left">
-                                <div class=" delay-01s animated fadeInDown wow animated">
-                                    {!! $page->text !!} <!-- panaudojame laravelcollective sintakse pasiimdami duomenis is db-->
-                                </div>
-                                <div class="work_bottom">
-                                    <span>Norite sužinoti daugiau?</span> <a href="{{ route('page', array('alias'=>$page->alias)) }}" class="contact_btn">Susisiekite</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    <!--Aboutus pabaiga-->
-    @endif
+        </div>
+    </div>
+</section>
+<!--Aboutus pabaiga-->
+@endif
 @endforeach
 @endif
 
@@ -60,10 +63,13 @@
         <div class="service_wrapper">
 
             @foreach($services as $k=>$service)
-                @if($k == 0 || $k%3 == 0) <!-- apsirasome salyga, kuri rodo, kad formuojame 3 dinaminiu elementu rinkiniu eile -->
-                    <div class="row {{ ($k !=0) ? 'borderTop':'' }}"><!-- pirmai eilei pabraukimo virsuje nereikia -->
+            @if($k == 0 || $k%3 == 0)
+            <!-- apsirasome salyga, kuri rodo, kad formuojame 3 dinaminiu elementu rinkiniu eile -->
+            <div class="row {{ ($k !=0) ? 'borderTop':'' }}">
+                <!-- pirmai eilei pabraukimo virsuje nereikia -->
                 @endif
-                 <div class="col-lg-4 {{ ($k%3 >0) ? 'borderLeft':'' }} {{ ($k>2)? 'mrgTop' : '' }}"><!-- jei elementas nera pirmasis naudojame pabraukima is kaires; jei dinamiskai perduodamo elemento indeksas didesnis uz 2 (t.y. 4 ir toliau irasas) pridedame papildoma margin parametra-->
+                <div class="col-lg-4 {{ ($k%3 >0) ? 'borderLeft':'' }} {{ ($k>2)? 'mrgTop' : '' }}">
+                    <!-- jei elementas nera pirmasis naudojame pabraukima is kaires; jei dinamiskai perduodamo elemento indeksas didesnis uz 2 (t.y. 4 ir toliau irasas) pridedame papildoma margin parametra-->
                     <div class="service_block">
                         <div class="service_icon delay-03s animated wow  zoomIn">
                             <span><i class="fa {{ $service->icon }}"></i></span>
@@ -73,8 +79,8 @@
                     </div>
                 </div>
                 @if(($k+1)%3 == 0)
-                    </div>
-                @endif
+            </div>
+            @endif
             @endforeach
         </div>
     </div>
@@ -85,10 +91,7 @@
 
 
 
-
-
-
-
+@if(isset($portfolios) && is_object($portfolios))
 <!-- Portfolio pradzia-->
 <section id="Portfolio" class="content">
 
@@ -97,7 +100,7 @@
 
         <!-- Title pradzia-->
         <div class="section-title">
-            <h2>Portfolio</h2>
+            <h2>Galimi sprendimų pavyzdžiai</h2>
         </div>
         <!--/Title pabaiga-->
 
@@ -106,234 +109,120 @@
 
     <div class="portfolio-top"></div>
 
-    <!-- Portfolio Filters pradzia-->
-    <div class="portfolio">
 
+    <div class="portfolio">
+        <!-- Portfolio Filters pradzia-->
+        @if(isset($tags))
         <div id="filters" class="sixteen columns">
             <ul class="clearfix">
                 <li><a id="all" href="#" data-filter="*" class="active">
                         <h5>All</h5>
                     </a></li>
-                <li><a class="" href="#" data-filter=".prototype">
-                        <h5>Prototype</h5>
-                    </a></li>
-                <li><a class="" href="#" data-filter=".design">
-                        <h5>Design</h5>
-                    </a></li>
-                <li><a class="" href="#" data-filter=".android">
-                        <h5>Android</h5>
-                    </a></li>
-                <li><a class="" href="#" data-filter=".appleIOS">
-                        <h5>Apple IOS</h5>
-                    </a></li>
-                <li><a class="" href="#" data-filter=".web">
-                        <h5>Web App</h5>
-                    </a></li>
+                @foreach($tags as $tag)
+                <li>
+                    <a class="" href="#" data-filter=".{{ $tag }}">
+                        <h5>{{ $tag }}</h5>
+                    </a>
+                </li>
+                @endforeach
             </ul>
         </div>
+        @endif
         <!--/Portfolio Filters pabaiga-->
+
 
         <!-- Portfolio Wrapper pradzia-->
         <div class="isotope fadeInLeft animated wow" style="position: relative; overflow: hidden; height: 480px;"
             id="portfolio_wrapper">
-
-            <!-- Portfolio Item 1 pradzia-->
+            @foreach($portfolios as $item)
+            <!-- Portfolio Item pradzia-->
             <div style="position: absolute; left: 0px; top: 0px; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1); width: 337px; opacity: 1;"
-                class="portfolio-item one-four   appleIOS isotope-item">
-                <div class="portfolio_img"> <img src="{{ asset('img/portfolio_pic1.jpg') }}" alt="Portfolio 1"> </div>
+                class="portfolio-item one-four {{ $item->filter }} isotope-item">
+                <div class="portfolio_img"> {{ Html::image('img/'.$item->images, $item->name) }} </div>
                 <div class="item_overlay">
                     <div class="item_info">
-                        <h4 class="project_name">SMS Mobile App</h4>
+                        <h4 class="project_name">{{ $item->name }}</h4>
                     </div>
                 </div>
             </div>
             <!--/Portfolio Item pabaiga-->
-
-            <!-- Portfolio Item 2 pradzia -->
-            <div style="position: absolute; left: 0px; top: 0px; transform: translate3d(337px, 0px, 0px) scale3d(1, 1, 1); width: 337px; opacity: 1;"
-                class="portfolio-item one-four  design isotope-item">
-                <div class="portfolio_img"> <img src="{{ asset('img/portfolio_pic2.jpg') }}" alt="Portfolio 1"> </div>
-                <div class="item_overlay">
-                    <div class="item_info">
-                        <h4 class="project_name">Finance App</h4>
-                    </div>
-                </div>
-            </div>
-            <!--/Portfolio Item 2 pabaiga -->
-
-            <!-- Portfolio Item 3 pradzia-->
-            <div style="position: absolute; left: 0px; top: 0px; transform: translate3d(674px, 0px, 0px) scale3d(1, 1, 1); width: 337px; opacity: 1;"
-                class="portfolio-item one-four  design  isotope-item">
-                <div class="portfolio_img"> <img src="{{ asset('img/portfolio_pic3.jpg') }}" alt="Portfolio 1"> </div>
-                <div class="item_overlay">
-                    <div class="item_info">
-                        <h4 class="project_name">GPS Concept</h4>
-                    </div>
-                </div>
-            </div>
-            <!--/Portfolio Item 3 pabaiga-->
-
-            <!-- Portfolio Item 4 pradzia-->
-            <div style="position: absolute; left: 0px; top: 0px; transform: translate3d(1011px, 0px, 0px) scale3d(1, 1, 1); width: 337px; opacity: 1;"
-                class="portfolio-item one-four  android  prototype web isotope-item">
-                <div class="portfolio_img"> <img src="{{ asset('img/portfolio_pic4.jpg') }}" alt="Portfolio 1"> </div>
-                <div class="item_overlay">
-                    <div class="item_info">
-                        <h4 class="project_name">Shopping</h4>
-                    </div>
-                </div>
-            </div>
-            <!-- Portfolio Item 4 pabaiga-->
-
-            <!-- Portfolio Item 5 pradzia-->
-            <div style="position: absolute; left: 0px; top: 0px; transform: translate3d(0px, 240px, 0px) scale3d(1, 1, 1); width: 337px; opacity: 1;"
-                class="portfolio-item one-four  design isotope-item">
-                <div class="portfolio_img"> <img src="{{ asset('img/portfolio_pic5.jpg') }}" alt="Portfolio 1"> </div>
-                <div class="item_overlay">
-                    <div class="item_info">
-                        <h4 class="project_name">Managment</h4>
-                    </div>
-                </div>
-            </div>
-            <!--/Portfolio Item 5 pabaiga-->
-
-            <!-- Portfolio Item 6 pradzia -->
-            <div style="position: absolute; left: 0px; top: 0px; transform: translate3d(337px, 240px, 0px) scale3d(1, 1, 1); width: 337px; opacity: 1;"
-                class="portfolio-item one-four  web isotope-item">
-                <div class="portfolio_img"> <img src="{{ asset('img/portfolio_pic6.jpg') }}" alt="Portfolio 1"> </div>
-                <div class="item_overlay">
-                    <div class="item_info">
-                        <h4 class="project_name">iPhone</h4>
-                    </div>
-                </div>
-            </div>
-            <!--/Portfolio Item 6 pabaiga-->
-
-            <!-- Portfolio Item 7 pradzia -->
-            <div style="position: absolute; left: 0px; top: 0px; transform: translate3d(674px, 240px, 0px) scale3d(1, 1, 1); width: 337px; opacity: 1;"
-                class="portfolio-item one-four  design web isotope-item">
-                <div class="portfolio_img"> <img src="{{ asset('img/portfolio_pic7.jpg') }}" alt="Portfolio 1"> </div>
-                <div class="item_overlay">
-                    <div class="item_info">
-                        <h4 class="project_name">Nexus Phone</h4>
-                    </div>
-                </div>
-            </div>
-            <!--/Portfolio Item 7 pabaiga-->
-
-            <!-- Portfolio Item 8 pradzia-->
-            <div style="position: absolute; left: 0px; top: 0px; transform: translate3d(1011px, 240px, 0px) scale3d(1, 1, 1); width: 337px; opacity: 1;"
-                class="portfolio-item one-four   android isotope-item">
-                <div class="portfolio_img"> <img src="{{ asset('img/portfolio_pic8.jpg') }}" alt="Portfolio 1"> </div>
-                <div class="item_overlay">
-                    <div class="item_info">
-                        <h4 class="project_name">Android</h4>
-                    </div>
-                </div>
-                </a>
-            </div>
-            <!--/Portfolio Item 8 pabaiga-->
-
+            @endforeach
         </div>
         <!--/Portfolio Wrapper pabaiga-->
-
     </div>
     <!--/Portfolio Filters pabaiga-->
-
     <div class="portfolio_btm"></div>
-
 
     <div id="project_container">
         <div class="clear"></div>
         <div id="project_data"></div>
     </div>
-
-
 </section>
 <!--/Portfolio pabaiga -->
+@endif
 
-<section class="page_section" id="clients">
-    <!--page_section-->
-    <h2>Clients</h2>
-    <!--page_section-->
-    <div class="client_logos">
-        <!--client_logos-->
-        <div class="container">
-            <ul class="fadeInRight animated wow">
-                <li><a href="javascript:void(0)"><img src="{{ asset('img/client_logo1.png') }}" alt=""></a></li>
-                <li><a href="javascript:void(0)"><img src="{{ asset('img/client_logo2.png') }}" alt=""></a></li>
-                <li><a href="javascript:void(0)"><img src="{{ asset('img/client_logo3.png') }}" alt=""></a></li>
-                <li><a href="javascript:void(0)"><img src="{{ asset('img/client_logo4.png') }}" alt=""></a></li>
-            </ul>
-        </div>
-    </div>
-</section>
+
+<!-- klientu dalis. uzkomentuojame, nes nenaudosime kol kas  -->
+<!-- <section class="page_section" id="clients"> -->
+<!--page_section-->
+<!-- <h2>Clients</h2> -->
+<!--page_section-->
+<!-- <div class="client_logos"> -->
+<!--client_logos-->
+<!-- <div class="container"> -->
+<!-- <ul class="fadeInRight animated wow"> -->
+<!-- <li><a href="javascript:void(0)"><img src="{{ asset('img/client_logo1.png') }}" alt=""></a></li> -->
+<!-- <li><a href="javascript:void(0)"><img src="{{ asset('img/client_logo2.png') }}" alt=""></a></li> -->
+<!-- <li><a href="javascript:void(0)"><img src="{{ asset('img/client_logo3.png') }}" alt=""></a></li> -->
+<!-- <li><a href="javascript:void(0)"><img src="{{ asset('img/client_logo4.png') }}" alt=""></a></li> -->
+<!-- </ul> -->
+<!-- </div> -->
+<!-- </div> -->
+<!-- </section> -->
 <!--client_logos-->
 
+
+@if(isset($peoples) && is_object($peoples))
+
+
+
+@endif
 <section class="page_section team" id="team">
     <!--main-section team-start-->
     <div class="container">
-        <h2>Team</h2>
-        <h6>Lorem ipsum dolor sit amet, consectetur adipiscing.</h6>
+        <h2>Komanda</h2>
+        <h6>Trys - viename!</h6>
+
         <div class="team_section clearfix">
+            @foreach($peoples as $k=>$people)
             <div class="team_area">
-                <div class="team_box wow fadeInDown delay-03s">
-                    <div class="team_box_shadow"><a href="javascript:void(0)"></a></div>
-                    <img src="{{ asset('img/team_pic1.jpg') }}" alt="">
-                    <ul>
+                <div class="team_box wow fadeInDown delay-0{{ ($k*3 + 3) }}s">
+                    <!-- <div class="team_box_shadow"><a href="javascript:void(0)"></a></div> --><!-- cia galime aktyvuoti lauka, kuriame pateikiame asmeninius kontaktus-->
+                    {{ Html::image('img/'.$people->images, $people->name) }}
+                    <!-- <ul>
                         <li><a href="javascript:void(0)" class="fa fa-twitter"></a></li>
                         <li><a href="javascript:void(0)" class="fa fa-facebook"></a></li>
                         <li><a href="javascript:void(0)" class="fa fa-pinterest"></a></li>
                         <li><a href="javascript:void(0)" class="fa fa-google-plus"></a></li>
-                    </ul>
+                    </ul> -->
                 </div>
-                <h3 class="wow fadeInDown delay-03s">Tom Rensed</h3>
-                <span class="wow fadeInDown delay-03s">Chief Executive Officer</span>
-                <p class="wow fadeInDown delay-03s">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin
-                    consequat sollicitudin cursus. Dolor sit amet, consectetur adipiscing elit proin consequat.</p>
+                <h3 class="wow fadeInDown delay-0{{ ($k*3 + 3) }}s">{{ $people->name }}</h3>
+                <span class="wow fadeInDown delay-0{{ ($k*3 + 3) }}s">{{ $people->position}}</span>
+                <p class="wow fadeInDown delay-0{{ ($k*3 + 3) }}s">{{ $people->text }}</p>
             </div>
-            <div class="team_area">
-                <div class="team_box  wow fadeInDown delay-06s">
-                    <div class="team_box_shadow"><a href="javascript:void(0)"></a></div>
-                    <img src="{{ asset('img/team_pic2.jpg') }}" alt="">
-                    <ul>
-                        <li><a href="javascript:void(0)" class="fa fa-twitter"></a></li>
-                        <li><a href="javascript:void(0)" class="fa fa-facebook"></a></li>
-                        <li><a href="javascript:void(0)" class="fa fa-pinterest"></a></li>
-                        <li><a href="javascript:void(0)" class="fa fa-google-plus"></a></li>
-                    </ul>
-                </div>
-                <h3 class="wow fadeInDown delay-06s">Kathren Mory</h3>
-                <span class="wow fadeInDown delay-06s">Vice President</span>
-                <p class="wow fadeInDown delay-06s">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin
-                    consequat sollicitudin cursus. Dolor sit amet, consectetur adipiscing elit proin consequat.</p>
-            </div>
-            <div class="team_area">
-                <div class="team_box wow fadeInDown delay-09s">
-                    <div class="team_box_shadow"><a href="javascript:void(0)"></a></div>
-                    <img src="{{ asset('img/team_pic3.jpg') }}" alt="">
-                    <ul>
-                        <li><a href="javascript:void(0)" class="fa fa-twitter"></a></li>
-                        <li><a href="javascript:void(0)" class="fa fa-facebook"></a></li>
-                        <li><a href="javascript:void(0)" class="fa fa-pinterest"></a></li>
-                        <li><a href="javascript:void(0)" class="fa fa-google-plus"></a></li>
-                    </ul>
-                </div>
-                <h3 class="wow fadeInDown delay-09s">Lancer Jack</h3>
-                <span class="wow fadeInDown delay-09s">Senior Manager</span>
-                <p class="wow fadeInDown delay-09s">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin
-                    consequat sollicitudin cursus. Dolor sit amet, consectetur adipiscing elit proin consequat.</p>
-            </div>
+            @endforeach
         </div>
     </div>
 </section>
 <!--/Team-->
+
+
 <!--Footer-->
 <footer class="footer_wrapper" id="contact">
     <div class="container">
         <section class="page_section contact" id="contact">
             <div class="contact_section">
-                <h2>Contact Us</h2>
+                <h2>Susisiekite</h2>
                 <div class="row">
                     <div class="col-lg-4">
 
@@ -350,51 +239,59 @@
                 <div class="col-lg-4 wow fadeInLeft">
                     <div class="contact_info">
                         <div class="detail">
-                            <h4>UNIQUE Infoway</h4>
-                            <p>104, Some street, NewYork, USA</p>
+                            <h4> D | SPACE</h4>
+                            <p>Kaunas - Prienai - Alytus, LIETUVA</p>
                         </div>
                         <div class="detail">
-                            <h4>call us</h4>
-                            <p>+1 234 567890</p>
+                            <h4>Skambučiams</h4>
+                            <p>+370 656 55455</p>
                         </div>
                         <div class="detail">
-                            <h4>Email us</h4>
-                            <p>support@sitename.com</p>
+                            <h4>E-Paštas</h4>
+                            <p>support@donatas.space</p>
                         </div>
                     </div>
 
 
 
                     <ul class="social_links">
-                        <li class="twitter animated bounceIn wow delay-02s"><a href="javascript:void(0)"><i
-                                    class="fa fa-twitter"></i></a></li>
-                        <li class="facebook animated bounceIn wow delay-03s"><a href="javascript:void(0)"><i
+                        <!-- <li class="twitter animated bounceIn wow delay-02s"><a href="javascript:void(0)"><i
+                                    class="fa fa-twitter"></i></a></li> -->
+                        <li class="facebook animated bounceIn wow delay-03s"><a href="https://www.facebook.com/kulvinskas" target="_blank"><i
                                     class="fa fa-facebook"></i></a></li>
-                        <li class="pinterest animated bounceIn wow delay-04s"><a href="javascript:void(0)"><i
-                                    class="fa fa-pinterest"></i></a></li>
-                        <li class="gplus animated bounceIn wow delay-05s"><a href="javascript:void(0)"><i
-                                    class="fa fa-google-plus"></i></a></li>
+                        <li class="pinterest animated bounceIn wow delay-04s"><a href="https://www.instagram.com/donatas.space/" target="_blank"><i
+                                    class="fa fa-instagram"></i></a></li>
+                        <!-- <li class="gplus animated bounceIn wow delay-05s"><a href="javascript:void(0)"><i
+                                    class="fa fa-google-plus"></i></a></li> -->
                     </ul>
                 </div>
                 <div class="col-lg-8 wow fadeInLeft delay-06s">
                     <div class="form">
-                        <input class="input-text" type="text" name="" value="Your Name *"
+
+                    <form action="{{ route('home') }}" method="post">
+                    
+                        <input class="input-text" type="text" name="name" value="Jūsų Vardas *" onFocus="if(this.value==this.defaultValue)this.value='';"
+                            onBlur="if(this.value=='')this.value=this.defaultValue;">
+                        <input class="input-text" type="text" name="email" value="Jūsų el.p.adresas *"
                             onFocus="if(this.value==this.defaultValue)this.value='';"
                             onBlur="if(this.value=='')this.value=this.defaultValue;">
-                        <input class="input-text" type="text" name="" value="Your E-mail *"
+                        <textarea name="text" class="input-text text-area" cols="0" rows="0"
                             onFocus="if(this.value==this.defaultValue)this.value='';"
-                            onBlur="if(this.value=='')this.value=this.defaultValue;">
-                        <textarea class="input-text text-area" cols="0" rows="0"
-                            onFocus="if(this.value==this.defaultValue)this.value='';"
-                            onBlur="if(this.value=='')this.value=this.defaultValue;">Your Message *</textarea>
-                        <input class="input-btn" type="submit" value="send message">
+                            onBlur="if(this.value=='')this.value=this.defaultValue;">Jūsų žinutė *</textarea>
+                        <input class="input-btn" type="submit" value="siųsti užklausą">
+                        <!-- laravel apsauga sukuria hide tipo input'a su name=_token -->
+                        {{ csrf_field()  }}
+                    
+                    </form>
+
+
                     </div>
                 </div>
             </div>
         </section>
     </div>
     <div class="container">
-        <div class="footer_bottom"><span>Copyright © 2014, Template by <a href="http://webthemez.com">WebThemez.com</a>.
+        <div class="footer_bottom"><span>Visos teisės saugomos © 2020, Šablonas <a href="http://webthemez.com">WebThemez.com</a>.
             </span> </div>
     </div>
 </footer>

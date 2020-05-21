@@ -8,22 +8,60 @@ use App\Page;
 use App\Service;
 use App\Portfolio;
 use App\People;
+use DB;
+use Mail;
 
 class IndexController extends Controller
 {
     
     public function execute(Request $request){
+        
+        if($request->isMethod('post')) {
+            
+            $messages = [
+                'required'=>"laukelis :attribute negali būti tuščias",
+                'email'=>"laukelyje :attribute privalu nurodyti el.pašto adresą"
+            ];
+
+            $this->validate($request, [
+                'name' => 'required|max:255',
+                'email' => 'required|email',
+                'text' => 'required'
+            ], $messages);
+            dump($request);
+            
+            $data = $request->all();
+
+            $result = Mail::send('site.email', ['data'=>$data], function($message) use ($data) {
+                
+                $mail_admin = env('MAIL_ADMIN');
+                $message->from($data['email'], $data['name']);
+                $message->to($mail_admin)->subject('Question');
+                
+            });
+            if($result) {
+                return redirect()->route('home')->with('status', 'Pranešimas išsiųstas');
+            }
+            //pranesimo siuntimas
+
+        }
+        
+       
 
         $pages = Page::all();//pasiimam visus puslapius
         $portfolios = Portfolio::get(['name', 'filter', 'images']);//pasiimam pasirinktinius elementus
         $services = Service::where('id', '<', 20)->get();//pasiimam pasirinktinius elementus
         $peoples = People::take(3)->get();//paimam pirmus tris
-
-        //pasitikrinimui ar veikia fgalime panaudoti komanda dd
+         //pasitikrinimui ar veikia fgalime panaudoti komanda dd
         // dd($pages);
         // dd($portfolios);
         // dd($services);
         // dd($peoples);
+
+        $tags = DB::table('portfolios')->distinct()->pluck('filter');//apsirasome filtru is portfolios lenteles db pasiekima
+        // dd($tags);
+
+       
 
         //suformuojame meniu atvaizdavima imant duomenis is DB
         $menu = array();
@@ -60,6 +98,7 @@ class IndexController extends Controller
                 'services'=>$services,
                 'portfolios'=>$portfolios,
                 'peoples'=>$peoples,
+                'tags' => $tags,
         ));
     }
 }
