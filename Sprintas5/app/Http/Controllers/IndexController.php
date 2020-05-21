@@ -25,6 +25,41 @@ class IndexController extends Controller
         // dd($services);
         // dd($peoples);
 
-        return view('site.index');
+        //suformuojame meniu atvaizdavima imant duomenis is DB
+        $menu = array();
+        foreach($pages as $page){
+            //atskiras meniu punktas
+            $item = array('title'=>$page->name,'alias'=>$page->alias);
+            array_push($menu, $item);
+        }
+        //pasitikrinam ar veikia
+        //dd($menu);
+
+        //sufromuojam likusio turinio paemima is db 
+        //paslaugu
+        $item = array('title'=>'Paslaugos', 'alias'=>'service');//alias <- id html koed
+        array_push($menu, $item);
+
+        //portfolio
+        $item = array('title'=>'Portfolio', 'alias'=>'Portfolio');
+        array_push($menu, $item);
+
+        //komandos
+        $item = array('title'=>'Komanda', 'alias'=>'team');
+        array_push($menu, $item);
+
+        //kontaktu
+        $item = array('title'=>'Kontaktai', 'alias'=>'contact');
+        array_push($menu, $item);
+
+      
+
+        return view('site.index', array(
+                'menu'=>$menu,
+                'pages'=>$pages,
+                'services'=>$services,
+                'portfolios'=>$portfolios,
+                'peoples'=>$peoples,
+        ));
     }
 }
