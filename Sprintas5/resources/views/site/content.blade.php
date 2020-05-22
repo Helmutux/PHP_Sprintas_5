@@ -24,6 +24,7 @@
 </section>
 <!--Hero_Section pabaiga-->
 @else
+
 <!--Aboutus pradzia-->
 <section id="aboutUs">
     <div class="inner_wrapper">
@@ -42,7 +43,7 @@
                         <div class="work_bottom">
                             <span>Norite sužinoti daugiau?</span> <a
                                 href="{{ route('page', array('alias'=>$page->alias)) }}"
-                                class="contact_btn">Susisiekite</a>
+                                class="contact_btn">Plačiau</a>
                         </div>
                     </div>
                 </div>

@@ -11,14 +11,18 @@
 |
 */
 
-// Route::group([], function(){
+Route::group([], function(){
+    
     Route::match(['get', 'post'], '/',['uses'=>'IndexController@execute', 'as'=>'home']);
     Route::get('/pages/{alias}',['uses'=>'PageController@execute', 'as'=>'page']);
+    
     Route::auth();
-// });
+
+});
 
 //admin/portfolio/service
 Route::group(['prefix'=>'admin', 'middleware'=>'auth'], function(){
+
     //admin
     Route::get('/', function(){
 
