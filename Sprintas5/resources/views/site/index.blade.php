@@ -1,4 +1,4 @@
-@extends('site')
+@extends('layouts.site')
 
 @section('header')
     @include('site.header')

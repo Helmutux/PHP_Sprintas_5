@@ -25,8 +25,13 @@ Route::group(['prefix'=>'admin', 'middleware'=>'auth'], function(){
 
     //admin
     Route::get('/', function(){
+        if(view()->exists('admin.index')){
+            $data = ['title'=>'Administratoriaus puslapis'];
+            return view('admin.index', $data);
+        }
 
     });    
+    
     //admin/pages
     Route::group(['prefix'=>'pages'], function(){
         //admin/pages
@@ -64,3 +69,8 @@ Route::group(['prefix'=>'admin', 'middleware'=>'auth'], function(){
     });
 
 });
+
+// Auth::routes();
+Route::auth();
+// Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index');
