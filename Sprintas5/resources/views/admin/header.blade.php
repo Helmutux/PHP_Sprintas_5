@@ -19,7 +19,7 @@
 		</li>
 		
 		<li><a  href="{{route('portfolio')}}">
-          <h5>Portfolio</h5>
+          <h5>Portfolios</h5>
           </a>
 		</li>
 		

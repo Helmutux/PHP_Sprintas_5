@@ -47,13 +47,13 @@ Route::group(['prefix'=>'admin', 'middleware'=>'auth'], function(){
     //portfolio grupe 
      Route::group(['prefix'=>'portfolios'], function(){
      
-        Route::get('/', ['uses'=>'PortfolioController@execute', 'as'=>'portfolio']);
+        Route::get('/', ['uses'=>'PortfoliosController@execute', 'as'=>'portfolio']);
 
      
-        Route::match(['get', 'post'], '/add', ['uses'=>'PortfolioAddController@execute', 'as'=>'portfolioAdd']);
+        Route::match(['get', 'post'], '/add', ['uses'=>'PortfoliosAddController@execute', 'as'=>'portfoliosAdd']);
 
      
-        Route::match(['get', 'post', 'delete'], '/edit/{portfolio}', ['uses'=>'PortfolioEditController@execute', 'as'=>'portfolioEdit']);
+        Route::match(['get', 'post', 'delete'], '/edit/{portfolio}', ['uses'=>'PortfoliosEditController@execute', 'as'=>'portfoliosEdit']);
     });
 
     //service grupe

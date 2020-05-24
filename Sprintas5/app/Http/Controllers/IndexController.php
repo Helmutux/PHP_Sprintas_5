@@ -16,6 +16,7 @@ class IndexController extends Controller
     
     public function execute(Request $request){
         
+        //pranesimo issiuntimas is ivęsties lauku psl apacioje
         if($request->isMethod('post')) {
             
             $messages = [
@@ -42,7 +43,6 @@ class IndexController extends Controller
             if($result) {
                 return redirect()->route('home')->with('status', 'Pranešimas išsiųstas');
             }
-            //pranesimo siuntimas
 
         }
         

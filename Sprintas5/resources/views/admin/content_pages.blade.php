@@ -23,7 +23,8 @@
                     <td>{{ $page->created_at }}</td>
                     <td>
                     {!! Form::open(['url'=>route('pagesEdit', ['page'=>$page->id]), 'class'=>'form-horizontal', 'method'=>'post']) !!}
-                        {!! Form::hidden('action', 'delete') !!}
+                        
+                        {!! method_field('DELETE') !!}
                         {!! Form::button('Ištrinti', ['class'=>'btn btn-danger', 'type'=>'submit']) !!}
                     {!! Form::close() !!}
                     </td>

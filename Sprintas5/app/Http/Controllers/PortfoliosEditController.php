@@ -3,33 +3,44 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Page;
+
+use App\Http\Requests;
+use App\Http\Controllers\Controller;
+
+use App\Http\Requests\PagesRequest;
+
+use App\Portfolio;
 use Validator;
 
-class PagesEditController extends Controller
+class PortfoliosEditController extends Controller
 {
-    //
-    public function execute(Page $page, Request $request){
+    public function execute(Portfolio $portfolio, Request $request){
 
+        if(!$portfolio){
+            return redirect('admin');
+        }
         //trynimas esancio metodo
         if($request->isMethod('delete')){
-            $page->delete();
-            return redirect('admin')->with('status', 'Puslapis ištrintas');
+            $portfolio->delete();
+            return redirect('admin')->with('status', 'Portfolio ištrintas');
         }
 
         //redagavimas esamo iraso
        if($request->isMethod('post')){
+
             $input = $request->except('_token');
+
             $validator = Validator::make($input, [
                 'name'=>'required|max:255',
-                'alias'=>'required|max:255|unique:pages,alias,'.$input['id'],
-                'text'=>'required'
-            ]);
+                'filter'=>'required|max:255'
+                ]);
+
             if($validator->fails()){
                 return redirect()
-                    ->route('pagesEdit', ['page'=>$input['id']])
+                    ->route('portfoliosEdit', ['portfolio'=>$input['id']])
                     ->withErrors($validator);
             }
+
             if($request->hasFile('images')){
                 $file = $request->file('images');
                 $file->move(public_path().'/img', $file->getClientOriginalName());
@@ -41,21 +52,22 @@ class PagesEditController extends Controller
             }
             unset($input['old_images']);
 
-            $page->fill($input);
+            $portfolio->fill($input);
 
-            if($page->update()){
-                return redirect('admin')->with('status', 'Puslapis sėkmingai atnaujintas');
+            if($portfolio->update()){
+                return redirect('admin')->with('status', 'Portfolio sėkmingai atnaujintas');
             }
        }
 
 
-        $old = $page->toArray();
-        if(view()->exists('admin.pages_edit')){
+        $old = $portfolio->toArray();
+
+        if(view()->exists('admin.portfolios_edit')){
             $data = [
-                'title'=>'Puslapio redagavimas - '.$old['name'],
+                'title'=>'Portfolio redagavimas - '.$old['name'],
                 'data'=>$old
             ];
-            return view('admin.pages_edit', $data);
+            return view('admin.portfolios_edit', $data);
         }
     }
 }
