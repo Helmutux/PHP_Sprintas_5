@@ -73,7 +73,7 @@
                     <!-- jei elementas nera pirmasis naudojame pabraukima is kaires; jei dinamiskai perduodamo elemento indeksas didesnis uz 2 (t.y. 4 ir toliau irasas) pridedame papildoma margin parametra-->
                     <div class="service_block">
                         <div class="service_icon delay-03s animated wow  zoomIn">
-                            <span><i class="fa {{ $service->icon }}"></i></span>
+                            <span><i class="{{ $service->icon }}"></i></span>
                         </div>
                         <h3 class="animated fadeInUp wow">{{ $service->name }}</h3>
                         <p class="animated fadeInDown wow">{{ $service->text }}</p>
@@ -260,7 +260,7 @@
                                     class="fa fa-twitter"></i></a></li> -->
                         <li class="facebook animated bounceIn wow delay-03s"><a href="https://www.facebook.com/kulvinskas" target="_blank"><i
                                     class="fa fa-facebook"></i></a></li>
-                        <li class="pinterest animated bounceIn wow delay-04s"><a href="https://www.instagram.com/donatas.space/" target="_blank"><i
+                        <li class="instagram animated bounceIn wow delay-04s"><a href="https://www.instagram.com/donatas.space/" target="_blank"><i
                                     class="fa fa-instagram"></i></a></li>
                         <!-- <li class="gplus animated bounceIn wow delay-05s"><a href="javascript:void(0)"><i
                                     class="fa fa-google-plus"></i></a></li> -->

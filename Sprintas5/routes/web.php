@@ -59,18 +59,17 @@ Route::group(['prefix'=>'admin', 'middleware'=>'auth'], function(){
     //service grupe
     Route::group(['prefix'=>'services'], function(){
      
-        Route::get('/', ['uses'=>'ServiceController@execute', 'as'=>'services']);
+        Route::get('/', ['uses'=>'ServicesController@execute', 'as'=>'services']);
 
      
-        Route::match(['get', 'post'], '/add', ['uses'=>'ServiceAddController@execute', 'as'=>'serviceAdd']);
+        Route::match(['get', 'post'], '/add', ['uses'=>'ServicesAddController@execute', 'as'=>'servicesAdd']);
 
      
-        Route::match(['get', 'post', 'delete'], '/edit/{service}', ['uses'=>'ServiceEditController@execute', 'as'=>'serviceEdit']);
+        Route::match(['get', 'post', 'delete'], '/edit/{service}', ['uses'=>'ServicesEditController@execute', 'as'=>'servicesEdit']);
     });
 
 });
 
-// Auth::routes();
-Route::auth();
-// Route::get('/home', 'HomeController@index')->name('home');
+Auth::routes();
 Route::get('/home', 'HomeController@index');
+
