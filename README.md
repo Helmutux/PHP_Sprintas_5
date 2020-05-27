@@ -18,5 +18,5 @@ Realizuota:
   
   Pridedama duomenų bazė 'landpage'. Esantis bazėje vartotojas gali jungtis kaip 'mb@pastas.com' su slaptažodžiu '123456789'.
   Prieš paleidžiant būtina composer'io instaliacija (vendor katalogas, etc.)
-  Realiai veikianti svetainė bus patalpinta http://donatas.space
+  Realiai veikianti svetainė patalpinta http://donatas.space
 
